@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://JAVA.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>academy3</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<description></description>
+		<display-name>AcademyStudentServlet</display-name>
+		<servlet-name>AcademyStudentServlet</servlet-name>
+		<servlet-class>academy3.AcademyStudentServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AcademyStudentServlet</servlet-name>
+		<url-pattern>/AcademyStudentServlet</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<description></description>
+		<display-name>AcademyTeacherServlet</display-name>
+		<servlet-name>AcademyTeacherServlet</servlet-name>
+		<servlet-class>academy3.AcademyTeacherServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AcademyTeacherServlet</servlet-name>
+		<url-pattern>/AcademyTeacherServlet</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<description></description>
+		<display-name>AcademyClassServlet</display-name>
+		<servlet-name>AcademyClassServlet</servlet-name>
+		<servlet-class>academy3.AcademyClassServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AcademyClassServlet</servlet-name>
+		<url-pattern>/AcademyClassServlet</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<description></description>
+		<display-name>AcademySubjectServlet</display-name>
+		<servlet-name>AcademySubjectServlet</servlet-name>
+		<servlet-class>academy3.AcademySubjectServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AcademySubjectServlet</servlet-name>
+		<url-pattern>/AcademySubjectServlet</url-pattern>
+	</servlet-mapping>
+
+
+
+	<servlet>
+		<description></description>
+		<display-name>AcademyAssignClass</display-name>
+		<servlet-name>AcademyAssignClass</servlet-name>
+		<servlet-class>academy3.AcademyAssignClass</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AcademyAssignClass</servlet-name>
+		<url-pattern>/AcademyAssignClass</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	<servlet>
+		<description></description>
+		<display-name>AcademyAssignTeacher</display-name>
+		<servlet-name>AcademyAssignTeacher</servlet-name>
+		<servlet-class>academy3.AcademyAssignTeacher</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AcademyAssignTeacher</servlet-name>
+		<url-pattern>/AcademyAssignTeacher</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	<servlet>
+		<description></description>
+		<display-name>AcademyClassReport</display-name>
+		<servlet-name>AcademyClassReport</servlet-name>
+		<servlet-class>academy3.AcademyClassReport</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AcademyClassReport</servlet-name>
+		<url-pattern>/AcademyClassReport</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	<servlet>
+		<description></description>
+		<display-name>userLogin</display-name>
+		<servlet-name>userLogin</servlet-name>
+		<servlet-class>academy3.userLogin</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>userLogin</servlet-name>
+		<url-pattern>/userLogin</url-pattern>
+	</servlet-mapping>
+</web-app>

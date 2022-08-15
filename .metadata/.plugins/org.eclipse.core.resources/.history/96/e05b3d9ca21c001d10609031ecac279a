@@ -1,0 +1,21 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Success</title>
+</head>
+<body>
+	
+
+	<% if(request.getParameter("n")!=null){
+	out.print("<h2 style=\"text-align:center\">"+request.getParameter("n")+"</h2>");
+	}
+	%>
+	
+	<p style="text-align:center"><a href="./home.jsp">Back</a></p>
+	
+
+</body>
+</html>

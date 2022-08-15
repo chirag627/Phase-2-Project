@@ -1,0 +1,69 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Home - Learners Academy</title>
+</head>
+<style>
+td, th {
+	padding-left: 25px;
+	padding-right: 25px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	border: 1px solid black;
+}
+
+table {
+	border: 1px solid black;
+}
+
+body {
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+	overflow: hidden;
+	background-color: #333;
+}
+
+.topnav a {
+	float: left;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+ul li a {
+	color: black;
+}
+</style>
+<body>
+	<div class="topnav">
+		<a>Learner's Academy</a> <a href="./AcademyStudentServlet">Student</a>
+		<a href="classAction.html">Class</a> <a href="teaAction.html">Teacher</a>
+		<a href="subAction.html">Subjects</a> <a href="viewClassReports.html">View
+			Class Reports</a>
+	</div>
+
+	<div style="padding-left: 16px">
+		<h2>Welcome to Learner's Academy</h2>
+		<p>Click on the option to continue</p>
+	</div>
+
+	<ul>
+		<li><a href="../AcademyStudentServlet?action=doRead">Students</a></li>
+		<li><a href="../AcademyClassServlet?action=doRead">Class</a></li>
+		<li><a href="../AcademySubjectServlet?action=doRead">Subjects</a></li>
+		<li><a href="../AcademyTeacherServlet?action=doRead">Teachers</a></li>
+		<li><a href="../AcademyAssignClass?action=doRead">Assign class to subject</a>
+		<li><a href="../AcademyAssignTeacher?action=doRead">Assign teacher to classt</a>
+
+		<li><a href="./viewClassReports.html">View Class Reports</a></li>
+
+	</ul>
+</body>
+</html>

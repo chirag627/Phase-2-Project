@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Home - Learner's Academy</title>
+</head>
+<body>
+	<%@ include file="components/header.jsp"%>
+	<div style="padding-left: 16px">
+		<h2>Welcome to Learner's Academy</h2>
+		<p>Click on the option to continue</p>
+	</div>
+
+	<ul>
+		<li><a href="./studentController?action=read">Students</a></li>
+		<li><a href="./cclassController?action=read">Class</a></li>
+		<li><a href="./subjectController?action=read">Subjects</a></li>
+		<li><a href="./teacherController?action=read">Teachers</a></li>
+		<li><a href="viewClassReports.html">View Class Reports</a></li>
+
+	</ul>
+</body>
+</html>

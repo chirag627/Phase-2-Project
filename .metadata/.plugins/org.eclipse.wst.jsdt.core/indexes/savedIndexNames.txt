@@ -1,0 +1,12 @@
+INDEX VERSION 1.4+D:\main Prokect\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2889339337.index
+2928512586.index
+4199310045.index
+272905424.index
+1079104317.index
+129928857.index
+3330531573.index
+809700512.index
+2110605268.index
+3869391871.index
+7047039.index

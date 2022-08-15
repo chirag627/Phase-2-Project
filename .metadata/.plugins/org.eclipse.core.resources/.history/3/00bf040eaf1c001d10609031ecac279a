@@ -1,0 +1,92 @@
+package academy3;
+
+import java.io.IOException;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.Resource;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
+
+import academy3.domain.AcademyClasses;
+import academy3.domain.AcademyStudents;
+import academy3.domain.AcademySubjects;
+import academy3.domain.AcademyTeachers;
+
+public class AcademyClassReport extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	@Resource(name = "Academy")
+	private DataSource datasource;
+
+	Connection myConn = null;
+	Statement myStmt = null;
+	ResultSet myRs = null;
+
+	public void init() throws ServletException {
+		try {
+			myConn = datasource.getConnection();
+		} catch (SQLException e) {
+			System.out.println("Cannot connect to the database");
+		}
+
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+		List<AcademySubjects> read_subjects = new ArrayList<>();
+
+		String class_id = request.getParameter("class_id");
+		try {
+			myStmt = myConn.createStatement();
+
+			myRs = myStmt.executeQuery("select * from subject where subject_class=" + class_id);
+			while (myRs.next()) {
+				int subject_id = myRs.getInt(1);
+				String subject_name = myRs.getString(2);
+				String subject_code = myRs.getString(3);
+
+				read_subjects.add(new AcademySubjects(subject_id, subject_name, subject_code));
+			}
+			request.setAttribute("READ_SUBJECT", read_subjects);
+
+			myStmt.close();
+
+			List<AcademyStudents> read_students = new ArrayList<>();
+			while (myRs.next()) {
+				int stu_id = myRs.getInt(1);
+				String stu_name = myRs.getString(2);
+				String stu_phone = myRs.getString(3);
+				String stu_class = myRs.getString(4);
+				read_students.add(new AcademyStudents(stu_id, stu_name, stu_phone, stu_class));
+			}
+			request.setAttribute("READ_STUDENT", read_students);
+			myStmt.close();
+
+			myStmt = myConn.createStatement();
+			myRs = myStmt.executeQuery("select * from teacher");
+			List<AcademyTeachers> read_teachers = new ArrayList<>();
+			while (myRs.next()) {
+				int tea_id = myRs.getInt(1);
+				String tea_name = myRs.getString(2);
+				String tea_phone = myRs.getString(3);
+				read_teachers.add(new AcademyTeachers(tea_id, tea_name, tea_phone));
+			}
+			request.setAttribute("READ_TEACHER", read_teachers);
+			myStmt.close();
+			RequestDispatcher rd = request.getRequestDispatcher("web/viewClassReport.jsp");
+
+		}
+
+		catch (SQLException e) {
+			System.out.println("");
+		}
+	}
+}

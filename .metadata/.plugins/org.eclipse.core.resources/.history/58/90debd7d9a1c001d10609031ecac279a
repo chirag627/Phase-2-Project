@@ -1,0 +1,113 @@
+package academy3;
+
+import java.io.IOException;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.Resource;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
+
+import academy3.domain.AcademyClasses;
+import academy3.domain.AcademySubjects;
+
+
+public class AcademyAssignTeacher extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	@Resource(name = "Academy")
+	private DataSource datasource;
+
+	Connection myConn = null;
+	Statement myStmt = null;
+	ResultSet myRs = null;
+
+	public void init() throws ServletException {
+		try {
+			myConn = datasource.getConnection();
+		} catch (SQLException e) {
+			System.out.println("Cannot connect to the database");
+		}
+
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String action = request.getParameter("action");
+		switch (action) {
+		case "doRead":
+			doRead(request, response);
+			break;
+		case "csAssign":
+			csAssign(request, response);
+			break;
+		}
+	}
+
+	private void doRead(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<AcademyClasses> read_classes = new ArrayList<>();
+		List<AcademySubjects> read_subjects = new ArrayList<>();
+		try {
+			myStmt = myConn.createStatement();
+			myRs = myStmt.executeQuery("select * from class");
+			while (myRs.next()) {
+				int class_id = myRs.getInt(1);
+				String class_name = myRs.getString(2);
+
+				String class_teacher = myRs.getString(3);
+				read_classes.add(new AcademyClasses(class_id, class_name, class_teacher));
+			}
+			myStmt.close();
+			myStmt = myConn.createStatement();
+
+			myRs = myStmt.executeQuery("select * from subject");
+			while (myRs.next()) {
+				int subject_id = myRs.getInt(1);
+				String subject_name = myRs.getString(2);
+				String subject_code = myRs.getString(3);
+				read_subjects.add(new AcademySubjects(subject_id, subject_name, subject_code));
+			}
+			myStmt.close();
+			request.setAttribute("READ_SUBJECTS", read_subjects);
+			request.setAttribute("READ_CLASS", read_classes);
+
+			RequestDispatcher rd = request.getRequestDispatcher("web/subject/assign_class.jsp");
+			rd.include(request, response);
+
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+
+	}
+
+	private void csAssign(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int rowAssigned;
+
+		String subject_id = request.getParameter("subject_name");
+		String class_id = request.getParameter("class_name");
+		System.out.println(subject_id + " " + class_id);
+		try {
+			myStmt = myConn.createStatement();
+			rowAssigned = myStmt.executeUpdate(
+					"update subject set subject_class=\"" + class_id + "\" where subject_id=\"" + subject_id + "\"");
+
+			if (rowAssigned > 0) {
+				response.sendRedirect("web/success.jsp?n=subject%20Updated%20to%20the%20database");
+			}
+
+		} catch (SQLException e) {
+			System.out.println(e);
+			response.sendRedirect("web/subject/assign_class.jsp?n=Something%20went%20wrong");
+		}
+
+	}
+
+}
